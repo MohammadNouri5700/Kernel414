@@ -850,14 +850,25 @@
 
 
 &mac {
-	slaves = <2>;
-	pinctrl-names = "default";
+	pinctrl-names = "default", "sleep";
 	pinctrl-0 = <&cpsw_default>;
-	//pinctrl-1 = <&cpsw_sleep>;
+	pinctrl-1 = <&cpsw_sleep>;
+	slaves = <2>;
 	dual_emac = <1>;
-//	active_slave = <1>;
 	status = "okay";
 };
+
+
+
+// &mac {
+// 	slaves = <2>;
+// 	pinctrl-names = "default";
+// 	pinctrl-0 = <&cpsw_default>;
+// 	//pinctrl-1 = <&cpsw_sleep>;
+// 	dual_emac = <1>;
+// //	active_slave = <1>;
+// 	status = "okay";
+// };
 
 &davinci_mdio {
 	pinctrl-names = "default", "sleep";
@@ -872,7 +883,8 @@
     };
 
 &cpsw_emac0 {
-	phy-mode = "rgmii-rxid";
+	phy_id = <&davinci_mdio>, <0>;
+	phy-mode = "rgmii-txid";
 	dual_emac_res_vlan=<1>;
 	fixed-link {
     	speed = <1000>;
@@ -881,7 +893,8 @@
 };
 
 &cpsw_emac1 {
-	phy-mode = "rgmii-rxid";
+	phy_id = <&davinci_mdio>, <1>;
+	phy-mode = "rgmii-txid";
 	dual_emac_res_vlan=<2>;
 	fixed-link {
     	speed = <1000>;
